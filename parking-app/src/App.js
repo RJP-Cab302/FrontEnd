@@ -5,7 +5,7 @@ function App() {
   const [data, setData] = useState([{}]);
   
   useEffect(()=> {
-    fetch("http://127.0.0.1:8080/").then(res => res.json()).then(res => setData(res)).catch(error => console.error(error))
+    fetch("/example").then(res => res.json()).then(res => setData(res)).catch(error => console.error(error))
   }, [])
    return (
     <div className="App">
