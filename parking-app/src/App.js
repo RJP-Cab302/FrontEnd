@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-
+import Header from "./components/Header";
 function App() {
   const [data, setData] = useState([{}]);
   
@@ -9,6 +9,7 @@ function App() {
   }, [])
    return (
     <div className="App">
+      <Header/>
       <h1>Hello RJP</h1>
       <h2>{data.name}</h2>
        <h2>{data.message}</h2>
