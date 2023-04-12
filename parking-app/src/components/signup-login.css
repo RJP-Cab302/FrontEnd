@@ -1,0 +1,65 @@
+form {
+    display: inline-block;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    height: 350px;
+    margin: 10px;
+}
+.label {
+    text-align: left;
+    margin: 10px 0;
+}
+form .form-control {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+button.btn {
+    padding: 10px;
+    background-color: rgb(94, 207, 217);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 50%;
+    margin-top: 10px;
+}
+button.btn:hover {
+    background-color: #45a049;}
+
+.login-wrapper
+{
+    
+}
+
+.login-wrapper .login-form
+{
+
+    display: inline-block;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    height: 350px;
+    margin: 10px;
+}
+button.login-btn {
+    padding: 10px;
+    background-color: rgb(94, 207, 217);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 50%;
+    margin-top: 10px;
+}
+.signup-link
+{
+    text-decoration: none;
+}
