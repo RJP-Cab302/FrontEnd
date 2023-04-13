@@ -1,0 +1,13 @@
+.main
+{
+    display: inline-block;
+    width: 90%;
+    margin: 10px;
+
+}
+
+.main button{
+    position: relative;
+    left: 40%; 
+}
+
