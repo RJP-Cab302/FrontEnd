@@ -12,7 +12,7 @@ export default function LandingPage() {
         <h1>Hello RJP</h1>
       <h2>{data.name}</h2>
        <h2>{data.message}</h2>
-    <h1>Sign up</h1> 
+    <h1>Login</h1> 
      <Login/>       
     </div>
    
