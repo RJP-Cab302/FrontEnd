@@ -1,8 +1,7 @@
 import React from "react";
 import './vehicle.css'
 import { useState } from "react";
-export default function Vechicle(props)
-{
+export default function Vechicle(props) {
   const [front, setFront] = useState('');
   const [rear, setRear] = useState('');
   const [description, setDescription] = useState('');
@@ -25,6 +24,7 @@ export default function Vechicle(props)
   const handleSaveClick = () => {
     setIsEditing(false);
   };
+
   const handleCancelClick = () => {
     setIsEditing(false);
   };
@@ -32,30 +32,57 @@ export default function Vechicle(props)
   if (isEditing) {
     return (
       <div>
-        <span>Front</span>
-        <input type="text" value={front} onChange={changeFront} />
-        <div>
-          <div>
-            <span>Rear</span>
-            <input type="text" value={rear} onChange={changeRear} />
+        <div className="container">
+          <div className="row">
+            <div className="col">
+              <div>
+                <span>Front</span>
+              </div>
+              <input type="text" value={front} onChange={changeFront} />
+            </div>
+            <div className="col">
+              <div>
+                <span>Rear</span>
+              </div>
+              <input type="text" value={rear} onChange={changeRear} />
+            </div>
           </div>
-          <div>
-            <span>Description</span>
-            <input type="text" value={description} onChange={changeDescription} />
+          <div className="row">
+            <div className="col">
+              <div>
+                <span>Description</span>
+              </div>
+              <input type="text" value={description} onChange={changeDescription} />
+            </div>
+            <div className="col align-items-end"> {/* Add class "align-items-end" to align child elements to bottom */}
+              <button onClick={handleSaveClick}>Save</button>
+              <button onClick={handleCancelClick}>Cancel</button>
+            </div>
           </div>
-          <button onClick={handleSaveClick}>Save</button>
         </div>
-        <button onClick={handleSaveClick}>Cancel</button>
       </div>
     );
   }
-
   return (
     <div>
-      <span>Front; {front}</span>
-     <div> <span>Rear:{rear}</span></div>
-      <div> <span>Desruption:{description}</span></div>
-      <button onClick={handleEditClick}>Edit</button>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <span>Front: {front}</span>
+          </div>
+          <div className="col">
+            <span>Rear: {rear}</span>
+          </div>
+          <div className="col align-items-end"> {/* Add class "align-items-end" to align child elements to bottom */}
+            <button onClick={handleEditClick}>Edit</button>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <span>Description: {description}</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
