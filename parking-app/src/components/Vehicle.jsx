@@ -2,16 +2,16 @@ import React from "react";
 import './vehicle.css'
 import { useState } from "react";
 export default function Vechicle(props) {
-  const [front, setFront] = useState('');
-  const [rear, setRear] = useState('');
+  const [numberPlate, setNumberPlate] = useState('');
+  const [color, setColor] = useState('');
   const [description, setDescription] = useState('');
   const [isEditing, setIsEditing] = useState(false);
 
-  const changeFront = (event) => {
-    setFront(event.target.value);
+  const changeNumberPlate = (event) => {
+    setNumberPlate(event.target.value);
   };
-  const changeRear = (event) => {
-    setRear(event.target.value);
+  const changeColor = (event) => {
+    setColor(event.target.value);
   };
   const changeDescription = (event) => {
     setDescription(event.target.value);
@@ -36,15 +36,15 @@ export default function Vechicle(props) {
           <div className="row">
             <div className="col">
               <div>
-                <span>Front</span>
+                <span>Number Plate</span>
               </div>
-              <input type="text" value={front} onChange={changeFront} />
+              <input type="text" value={numberPlate} onChange={changeNumberPlate} />
             </div>
             <div className="col">
               <div>
-                <span>Rear</span>
+                <span>Color</span>
               </div>
-              <input type="text" value={rear} onChange={changeRear} />
+              <input type="text" value={color} onChange={changeColor} />
             </div>
           </div>
           <div className="row">
@@ -68,10 +68,10 @@ export default function Vechicle(props) {
       <div className="container">
         <div className="row">
           <div className="col">
-            <span>Front: {front}</span>
+            <span>Number Plate: {numberPlate}</span>
           </div>
           <div className="col">
-            <span>Rear: {rear}</span>
+            <span>Color: {color}</span>
           </div>
           <div className="col"> {/* Add class "align-items-end" to align child elements to bottom */}
             <button className="save-cancel" onClick={handleEditClick}>Edit</button>
