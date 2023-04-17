@@ -40,7 +40,7 @@ const Login = () => {
         Login
       </Button>
       <div >
-        <a href='#' className='signup-link'>Sign up here</a>
+        <a href='signup' className='signup-link'>Sign up here</a>
       </div>
     </Form>
     </div>
