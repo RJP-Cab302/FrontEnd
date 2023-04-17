@@ -1,14 +1,32 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import jwt_decode from "jwt-decode";
 import './signup-login.css'
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+     let headersList = {
+       Accept: "*/*",
+       Authorization: "Basic SmltQHRlc3QuY29tOlN1cGVy",
+     };
+
+      fetch("/login", {
+        method: "GET",
+        headers: headersList,
+      }).then((res) => res.json())
+        .then((data) => {
+          const token = data.token;
+          // Do something with the token
+          console.log(token);
+          const user = jwt_decode(token);
+          console.log(user.user);
+          localStorage.setItem("token", token);
+          //window.location.href = "/";
+        });
+
   };
 
   const handleEmailChange = (event) => {

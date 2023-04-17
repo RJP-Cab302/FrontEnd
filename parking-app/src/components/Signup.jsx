@@ -1,14 +1,28 @@
-import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import './signup-login.css'
+import React, { useState } from "react";
+import { Form, Button } from "react-bootstrap";
+import "./signup-login.css";
 const SignUp = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+    let headersList = {
+      Accept: "*/*",
+      "Content-Type": "application/json",
+    };
+
+    let bodyContent = JSON.stringify({
+      username: email,
+      password: password,
+    });
+
+    fetch("/signup", {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList,
+    });
+    
   };
 
   const handleEmailChange = (event) => {
@@ -25,7 +39,12 @@ const SignUp = () => {
         <div className="label">
           <Form.Label>Email address</Form.Label>
         </div>
-        <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmailChange} />
+        <Form.Control
+          type="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={handleEmailChange}
+        />
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
@@ -35,10 +54,15 @@ const SignUp = () => {
         <div className="label">
           <Form.Label>Password</Form.Label>
         </div>
-        <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
       </Form.Group>
 
-      <Button variant="primary" type="submit" className='btn'>
+      <Button variant="primary" type="submit" className="btn">
         Sign up
       </Button>
     </Form>
