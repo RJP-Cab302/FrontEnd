@@ -7,6 +7,7 @@ import Login from './components/Login'
 function App() {
   const [data, setData] = useState([{}]);
   
+  
   useEffect(()=> {
     fetch("/example").then(res => res.json()).then(res => setData(res)).catch(error => console.error(error))
   }, [])
