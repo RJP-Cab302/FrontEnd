@@ -10,21 +10,17 @@ const Login = () => {
     event.preventDefault();
      let headersList = {
        Accept: "*/*",
-       Authorization: "Basic SmltQHRlc3QuY29tOlN1cGVy",
+       Authorization: `Basic ${btoa(`${email}:${password}`)}`,
      };
-
       fetch("/login", {
         method: "GET",
         headers: headersList,
       }).then((res) => res.json())
         .then((data) => {
           const token = data.token;
-          // Do something with the token
-          console.log(token);
-          const user = jwt_decode(token);
-          console.log(user.user);
+          const user = jwt_decode(token).user;
           localStorage.setItem("token", token);
-          //window.location.href = "/";
+          window.location.href = "/";
         });
 
   };
