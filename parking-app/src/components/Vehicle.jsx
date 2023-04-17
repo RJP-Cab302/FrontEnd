@@ -54,9 +54,9 @@ export default function Vechicle(props) {
               </div>
               <input type="text" value={description} onChange={changeDescription} />
             </div>
-            <div className="col align-items-end"> {/* Add class "align-items-end" to align child elements to bottom */}
-              <button onClick={handleSaveClick}>Save</button>
-              <button onClick={handleCancelClick}>Cancel</button>
+            <div className="col"> {/* Add class "align-items-end" to align child elements to bottom */}
+              <button className="save-cancel" onClick={handleSaveClick}>Save</button>
+              <button className="save-cancel" onClick={handleCancelClick}>Cancel</button>
             </div>
           </div>
         </div>
@@ -73,8 +73,8 @@ export default function Vechicle(props) {
           <div className="col">
             <span>Rear: {rear}</span>
           </div>
-          <div className="col align-items-end"> {/* Add class "align-items-end" to align child elements to bottom */}
-            <button onClick={handleEditClick}>Edit</button>
+          <div className="col"> {/* Add class "align-items-end" to align child elements to bottom */}
+            <button className="save-cancel" onClick={handleEditClick}>Edit</button>
           </div>
         </div>
         <div className="row">

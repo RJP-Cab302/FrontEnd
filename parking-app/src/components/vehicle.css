@@ -6,29 +6,16 @@
     
     
 }
-/* .row{
-        border: 2px solid rgb(207, 29, 29);
-        margin: 5px;
-        border-radius: 10px;
-}
-.col{
-    border: 2px solid rgb(35, 32, 217);
-        margin: 5px;
-        border-radius: 10px;
-} */
-/* .container Button {
-    position: relative;
-    left: 35%;
-    margin-top: 10px;
-} */
 
 /* Align child elements to bottom */
-.align-items-end {
-    display: flex;
+.save-cancel {
+    display: flex-end;
+    padding: 10px;
+    margin: 5px;
 }
 
 /* Style buttons */
-button {
+/* button {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -41,6 +28,21 @@ button {
 
 button:hover {
     background-color: #0069d9;
+} */
+button {
+    padding: 10px;
+    background-color: rgb(94, 207, 217);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 30%;
+    margin: 10px;
+}
+
+
+button:hover {
+    background-color: #45a049;
 }
 
 button:focus {
