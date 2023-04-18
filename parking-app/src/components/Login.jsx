@@ -8,21 +8,21 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-     let headersList = {
-       Accept: "*/*",
-       Authorization: `Basic ${btoa(`${email}:${password}`)}`,
-     };
-      fetch("/login", {
-        method: "GET",
-        headers: headersList,
-      }).then((res) => res.json())
-        .then((data) => {
-          const token = data.token;
-          //Get the user out of the decoded token to display wellcome message
-          const user = jwt_decode(token).user;
-          localStorage.setItem("token", token);
-          //window.location.href = "/";
-        });
+    let headersList = {
+      Accept: "*/*",
+      Authorization: `Basic ${btoa(`${email}:${password}`)}`,
+    };
+    fetch("/login", {
+      method: "GET",
+      headers: headersList,
+    }).then((res) => res.json())
+      .then((data) => {
+        const token = data.token;
+        //Get the user out of the decoded token to display wellcome message
+        const user = jwt_decode(token).user;
+        localStorage.setItem("token", token);
+        window.location.href = "/home";
+      });
 
   };
 
@@ -36,28 +36,30 @@ const Login = () => {
 
   return (
     <div className="login-wrapper">
-        <Form onSubmit={handleSubmit} className='login-form'>
-      <Form.Group controlId="formBasicEmail">
-        <div className="label">
-          <Form.Label>Email address</Form.Label>
-        </div>
-        <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmailChange} />
-      </Form.Group>
+      <h1>Hello RJP</h1>
+      <h2>Login</h2>
+      <Form onSubmit={handleSubmit} className='login-form'>
+        <Form.Group controlId="formBasicEmail">
+          <div className="label">
+            <Form.Label>Email address</Form.Label>
+          </div>
+          <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmailChange} />
+        </Form.Group>
 
-      <Form.Group controlId="formBasicPassword">
-        <div className="label">
-          <Form.Label>Password</Form.Label>
-        </div>
-        <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
-      </Form.Group>
+        <Form.Group controlId="formBasicPassword">
+          <div className="label">
+            <Form.Label>Password</Form.Label>
+          </div>
+          <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+        </Form.Group>
 
-      <Button variant="primary" type="submit" className='login-btn'>
-        Login
-      </Button>
-      <div >
-        <a href='signup' className='signup-link'>Sign up here</a>
-      </div>
-    </Form>
+        <Button variant="primary" type="submit" className='login-btn'>
+          Login
+        </Button>
+        <div >
+          <a href='signup' className='signup-link'>Sign up here</a>
+        </div>
+      </Form>
     </div>
   );
 };

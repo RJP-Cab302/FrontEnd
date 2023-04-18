@@ -7,23 +7,22 @@ import About from './pages/aboutpage';
 import SignUp from './pages/signuppage';
 import Login from './components/Login';
 import ListingPage from './pages/listingpage';
+import Home from './pages/homepage';
 function App() {
   return (
-     <BrowserRouter>
-     <div className="App">
-      <Header/>
-      <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/listing" element={<ListingPage />} />
-      <Route path="/login" element={<Login />} />
-
-
-
-      </Routes>
-      <Footer/>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/listing" element={<ListingPage />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }
