@@ -18,9 +18,10 @@ const Login = () => {
       }).then((res) => res.json())
         .then((data) => {
           const token = data.token;
+          //Get the user out of the decoded token to display wellcome message
           const user = jwt_decode(token).user;
           localStorage.setItem("token", token);
-          window.location.href = "/";
+          //window.location.href = "/";
         });
 
   };
