@@ -7,6 +7,8 @@ import About from './pages/aboutpage';
 import SignUp from './pages/signuppage';
 import Login from './components/Login';
 import ListingPage from './pages/listingpage';
+import BookingPage from './pages/booking_page';
+
 function App() {
   return (
      <BrowserRouter>
@@ -18,8 +20,7 @@ function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/listing" element={<ListingPage />} />
       <Route path="/login" element={<Login />} />
-
-
+	  <Route path="/book" element={<BookingPage />} />
 
       </Routes>
       <Footer/>
