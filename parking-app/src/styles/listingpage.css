@@ -1,9 +1,14 @@
-.main
-{
+.main {
     display: inline-block;
     width: 90%;
     margin: 10px;
 
 }
 
+.main-Button {
+    display:inline-block;
+    padding: 10px;
+    margin: 5px;
+    width: 30%;
 
+}

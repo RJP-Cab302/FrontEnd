@@ -18,7 +18,9 @@ export default function ListingPage() {
     <div>
       <h1>This is the listing page</h1>
       <div className="main">
-        <Button onClick={handleAddVehicle}>Add Vehicle</Button>
+        <div className="main-Button">
+          <Button onClick={handleAddVehicle}>Add Vehicle</Button>
+        </div>
         {vehicleList.map((vehicle, index) => (
           <Vehicle key={index} front={vehicle.front} rear={vehicle.rear} description={vehicle.description} />
         ))}

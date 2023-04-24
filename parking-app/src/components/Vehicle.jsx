@@ -87,8 +87,10 @@ export default function Vehicle(props) {
               </div>
               <input type="text" value={type} onChange={changeType} />
             </div>
+          </div>
+          <div className="row">
+            <div className="col"></div>
             <div className="col">
-              {" "}
               {/* Add class "align-items-end" to align child elements to bottom */}
               <button className="save-cancel" onClick={handleSaveClick}>
                 Save
@@ -115,7 +117,7 @@ export default function Vehicle(props) {
           <div className="col">
             {" "}
             {/* Add class "align-items-end" to align child elements to bottom */}
-            <button className="save-cancel" onClick={handleEditClick}>
+            <button className="edit" onClick={handleEditClick}>
               Edit
             </button>
           </div>
@@ -123,6 +125,12 @@ export default function Vehicle(props) {
         <div className="row">
           <div className="col">
             <span>Model: {model}</span>
+          </div>
+          <div className="col">
+            <span>Type: {type}</span>
+          </div>
+          <div className="col">
+            
           </div>
         </div>
       </div>
