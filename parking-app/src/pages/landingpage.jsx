@@ -10,7 +10,7 @@ export default function LandingPage() {
     <div>
       <h2>{data.name}</h2>
       <h2>{data.message}</h2>
-      <Login />
+      <Login url="home"/>
     </div>
 
   );

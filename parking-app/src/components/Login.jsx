@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import jwt_decode from "jwt-decode";
+//import jwt_decode from "jwt-decode";
 import './signup-login.css'
-const Login = () => {
+const Login = (props) => {
+  const url = props.url;
+  const message = props.message;
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,9 +22,9 @@ const Login = () => {
       .then((data) => {
         const token = data.token;
         //Get the user out of the decoded token to display wellcome message
-        const user = jwt_decode(token).user;
+        //const user = jwt_decode(token).user;
         localStorage.setItem("token", token);
-        window.location.href = "/home";
+        window.location.href = `/${url}`;
       });
 
   };
@@ -38,6 +41,7 @@ const Login = () => {
     <div className="login-wrapper">
       <h1>Hello RJP</h1>
       <h2>Login</h2>
+      <h3>{message}</h3>
       <Form onSubmit={handleSubmit} className='login-form'>
         <Form.Group controlId="formBasicEmail">
           <div className="label">
