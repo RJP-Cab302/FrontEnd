@@ -12,6 +12,13 @@
     display: flex-end;
     padding: 10px;
     margin: 5px;
+    width: 15%;
+}
+.edit {
+    display: flex-end;
+    padding: 10px;
+    margin: 5px;
+    width: 30%;
 }
 
 /* Style buttons */

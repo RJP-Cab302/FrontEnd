@@ -1,5 +1,4 @@
 import Signup from "../components/Signup";
-import React, { useState, useEffect } from 'react';
 
 export default function SignUp() {
 

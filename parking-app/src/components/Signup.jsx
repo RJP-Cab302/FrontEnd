@@ -4,6 +4,7 @@ import "./signup-login.css";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,6 +16,7 @@ const SignUp = () => {
     let bodyContent = JSON.stringify({
       username: email,
       password: password,
+      name: name
     });
 
     fetch("/signup", {
@@ -32,10 +34,21 @@ const SignUp = () => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
-
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="formBasicEmail">
+        <div className="label">
+          <Form.Label>Name</Form.Label>
+        </div>
+        <Form.Control
+          type="text"
+          placeholder="Enter your name"
+          value={name}
+          onChange={handleNameChange}
+        />
         <div className="label">
           <Form.Label>Email address</Form.Label>
         </div>
@@ -45,9 +58,6 @@ const SignUp = () => {
           value={email}
           onChange={handleEmailChange}
         />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
       </Form.Group>
 
       <Form.Group controlId="formBasicPassword">
@@ -61,7 +71,9 @@ const SignUp = () => {
           onChange={handlePasswordChange}
         />
       </Form.Group>
-
+      <Form.Text className="text-muted">
+        We'll never share your information with anyone else.
+      </Form.Text>
       <Button variant="primary" type="submit" className="btn">
         Sign up
       </Button>
