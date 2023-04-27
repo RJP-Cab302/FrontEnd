@@ -8,6 +8,7 @@ import SignUp from './pages/signuppage';
 import ListingPage from './pages/listingpage';
 import Home from './pages/homepage';
 import LoginPage from './pages/loginpage';
+import UserProfilePage from './pages/userprofile';
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,8 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/vehicles" element={<ListingPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/user" element={<UserProfilePage />} />
+
         </Routes>
         <Footer />
       </div>
