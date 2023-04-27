@@ -51,7 +51,19 @@ export default function Vehicle(props) {
   const handleCancelClick = () => {
     setIsEditing(false);
   };
-
+  const handleDeleteClick = () => {
+  const data = { vehicle_rego, token };
+  fetch("/delete_vehicle", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.error(error));
+};
   if (isEditing) {
     return (
       <div>
@@ -120,6 +132,7 @@ export default function Vehicle(props) {
             <button className="edit" onClick={handleEditClick}>
               Edit
             </button>
+            <button className="edit" onClick={handleDeleteClick}>Delete</button>
           </div>
         </div>
         <div className="row">
