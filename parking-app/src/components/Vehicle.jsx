@@ -5,17 +5,17 @@ import { useState, useEffect } from "react";
 export default function Vehicle(props) {
   //TODO remove dummy vehicles from listing page and fetch the vehicles from DB
   const [vehicle_rego, setRegistration] = useState("");
-  const [type, setType] = useState("");
-  const [make, setMake] = useState("");
-  const [model, setModel] = useState("");
+  const [vehicle_type, setType] = useState("");
+  const [vehicle_make, setMake] = useState("");
+  const [vehicle_model, setModel] = useState("");
   const [token, setToken] = useState("");
 
   const [isEditing, setIsEditing] = useState(false);
-    useEffect(() => {
-      if (localStorage.getItem("token")) {
-        setToken(localStorage.getItem("token"));
-      }
-    }, []);
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
   const changeRegistration = (event) => {
     setRegistration(event.target.value);
   };
@@ -35,7 +35,13 @@ export default function Vehicle(props) {
 
   const handleSaveClick = () => {
     setIsEditing(false);
-    const data = { vehicle_rego, type, make, model, token };
+    const data = {
+      vehicle_rego,
+      vehicle_type,
+      vehicle_make,
+      vehicle_model,
+      token,
+    };
     fetch("/add_vehicle", {
       method: "POST",
       headers: {
@@ -51,19 +57,7 @@ export default function Vehicle(props) {
   const handleCancelClick = () => {
     setIsEditing(false);
   };
-  const handleDeleteClick = () => {
-  const data = { vehicle_rego, token };
-  fetch("/delete_vehicle", {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error(error));
-};
+
   if (isEditing) {
     return (
       <div>
@@ -83,7 +77,7 @@ export default function Vehicle(props) {
               <div>
                 <span>Make</span>
               </div>
-              <input type="text" value={make} onChange={changeMake} />
+              <input type="text" value={vehicle_make} onChange={changeMake} />
             </div>
           </div>
           <div className="row">
@@ -91,13 +85,13 @@ export default function Vehicle(props) {
               <div>
                 <span>Model</span>
               </div>
-              <input type="text" value={model} onChange={changeModel} />
+              <input type="text" value={vehicle_model} onChange={changeModel} />
             </div>
             <div className="col">
               <div>
                 <span>Type</span>
               </div>
-              <input type="text" value={type} onChange={changeType} />
+              <input type="text" value={vehicle_type} onChange={changeType} />
             </div>
           </div>
           <div className="row">
@@ -124,7 +118,7 @@ export default function Vehicle(props) {
             <span>Number Plate: {vehicle_rego}</span>
           </div>
           <div className="col">
-            <span>Make: {make}</span>
+            <span>Make: {vehicle_make}</span>
           </div>
           <div className="col">
             {" "}
@@ -132,19 +126,16 @@ export default function Vehicle(props) {
             <button className="edit" onClick={handleEditClick}>
               Edit
             </button>
-            <button className="edit" onClick={handleDeleteClick}>Delete</button>
           </div>
         </div>
         <div className="row">
           <div className="col">
-            <span>Model: {model}</span>
+            <span>Model: {vehicle_model}</span>
           </div>
           <div className="col">
-            <span>Type: {type}</span>
+            <span>Type: {vehicle_type}</span>
           </div>
-          <div className="col">
-            
-          </div>
+          <div className="col"></div>
         </div>
       </div>
     </div>
