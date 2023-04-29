@@ -6,9 +6,7 @@ import Login from "../components/Login";
 
 export default function ListingPage() {
   const [token, setToken] = useState("");
-  const [vehicleList, setVehicleList] = useState([
-    { id:"", rego: "", make: "", model: "", type: "" },
-  ]);
+  const [vehicleList, setVehicleList] = useState([]);
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
@@ -31,18 +29,19 @@ export default function ListingPage() {
       .then((res) => res.json())
       .then((data) => {
         let newVehicleList = [];
-         for (let i = 0; i < 5; i++) {
-           newVehicleList.push({
-             rego: data.vehicles[i][0],
-             make: data.vehicles[i][1],
-             model: data.vehicles[i][2],
-             type: data.vehicles[i][3],
-           });
-            setVehicleList(newVehicleList);
-         }
+         if(data.vehicles){
+        for (let i = 0; i < data.vehicles.length; i++) {
+          newVehicleList.push({
+            rego: data.vehicles[i][0],
+            make: data.vehicles[i][1],
+            model: data.vehicles[i][2],
+            type: data.vehicles[i][3],
+          });}}
+        setVehicleList(newVehicleList);
+         
       })
       .catch((error) => console.error(error));
-  }, [token, vehicleList]);
+  }, [token]);
   const handleAddVehicle = () => {
     setVehicleList([...vehicleList, { front: "", rear: "", description: "" }]);
   };
@@ -58,10 +57,10 @@ export default function ListingPage() {
           {vehicleList.map((vehicle, index) => (
             <Vehicle
               key={index}
-              vehicle_rego={vehicle.rego}
-              vehicle_type={vehicle.type}
-              vehicle_make={vehicle.make}
-              vehicle_model={vehicle.model}
+              rego={vehicle.rego}
+              make={vehicle.make}
+              model={vehicle.model}
+              type={vehicle.type}
             />
           ))}
         </div>

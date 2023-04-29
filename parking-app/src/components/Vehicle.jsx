@@ -3,6 +3,10 @@ import "./vehicle.css";
 import { useState, useEffect } from "react";
 
 export default function Vehicle(props) {
+  const rego = props.rego;
+  const make = props.make;
+  const model = props.model;
+  const type = props.type;
   //TODO remove dummy vehicles from listing page and fetch the vehicles from DB
   const [vehicle_rego, setRegistration] = useState("");
   const [vehicle_type, setType] = useState("");
@@ -115,10 +119,10 @@ export default function Vehicle(props) {
       <div className="container">
         <div className="row">
           <div className="col">
-            <span>Number Plate: {vehicle_rego}</span>
+            <span>Number Plate: {rego}</span>
           </div>
           <div className="col">
-            <span>Make: {vehicle_make}</span>
+            <span>Make: {make}</span>
           </div>
           <div className="col">
             {" "}
@@ -130,10 +134,10 @@ export default function Vehicle(props) {
         </div>
         <div className="row">
           <div className="col">
-            <span>Model: {vehicle_model}</span>
+            <span>Model: {model}</span>
           </div>
           <div className="col">
-            <span>Type: {vehicle_type}</span>
+            <span>Type: {type}</span>
           </div>
           <div className="col"></div>
         </div>
