@@ -7,15 +7,42 @@ import Login from "../components/Login";
 export default function ListingPage() {
   const [token, setToken] = useState("");
   const [vehicleList, setVehicleList] = useState([
-    { front: "1234", rear: "1234", description: "A powerful pickup truck" },
-    { front: "2222", rear: "2222", description: "A reliable sedan" },
-    { front: "3322", rear: "3322", description: "A sleek sports car" },
+    { id:"", rego: "", make: "", model: "", type: "" },
   ]);
-   useEffect(() => {
-     if (localStorage.getItem("token")) {
-       setToken(localStorage.getItem("token"));
-     }
-   }, []);
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
+  useEffect(() => {
+    let headersList = {
+      "Content-Type": "application/json",
+    };
+
+    let bodyContent = JSON.stringify({
+      token: token,
+    });
+
+    fetch("/user_get_vehicles", {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        let newVehicleList = [];
+         for (let i = 0; i < 5; i++) {
+           newVehicleList.push({
+             rego: data.vehicles[i][0],
+             make: data.vehicles[i][1],
+             model: data.vehicles[i][2],
+             type: data.vehicles[i][3],
+           });
+            setVehicleList(newVehicleList);
+         }
+      })
+      .catch((error) => console.error(error));
+  }, [token, vehicleList]);
   const handleAddVehicle = () => {
     setVehicleList([...vehicleList, { front: "", rear: "", description: "" }]);
   };
@@ -31,9 +58,10 @@ export default function ListingPage() {
           {vehicleList.map((vehicle, index) => (
             <Vehicle
               key={index}
-              front={vehicle.front}
-              rear={vehicle.rear}
-              description={vehicle.description}
+              vehicle_rego={vehicle.rego}
+              vehicle_type={vehicle.type}
+              vehicle_make={vehicle.make}
+              vehicle_model={vehicle.model}
             />
           ))}
         </div>
@@ -42,7 +70,7 @@ export default function ListingPage() {
   } else {
     return (
       <div>
-        <Login url="vehicles" message="Please sign in to use this page"/>
+        <Login url="vehicles" message="Please sign in to use this page" />
       </div>
     );
   }
