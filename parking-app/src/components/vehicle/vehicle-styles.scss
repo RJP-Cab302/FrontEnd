@@ -1,0 +1,63 @@
+.container{
+    padding: 10px;
+    border: 2px solid black;
+    margin: 5px;
+    border-radius:10px ;
+    
+    
+}
+
+/* Align child elements to bottom */
+.save-cancel {
+    display: flex-end;
+    padding: 10px;
+    margin: 5px;
+    width: 15%;
+}
+.edit {
+    display: flex-end;
+    padding: 10px;
+    margin: 5px;
+    width: 30%;
+}
+
+/* Style buttons */
+/* button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #0069d9;
+} */
+button {
+    padding: 10px;
+    background-color: rgb(94, 207, 217);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 30%;
+    margin: 10px;
+}
+
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+.col input[type="text"],
+.col span {
+    word-wrap: break-word;
+    /* Allow words to break and wrap to the next line */
+}

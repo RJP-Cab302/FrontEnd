@@ -1,0 +1,32 @@
+@import '../../styles/colours.scss';
+
+nav ul li {
+    display: inline-block;
+    padding: 10px;
+}
+
+nav {
+    width: 100%;
+    display: inline-block;
+    text-align: right;
+    background-color: $base-color-dark;
+    border-radius: 3px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+}
+
+nav ul li a {
+    color: $base-color-light;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 3px;
+    transition: 0.3s ease all;
+}
+nav ul li a:hover {
+    color: $base-color-light;
+    background-color: $accent-color-1;
+}

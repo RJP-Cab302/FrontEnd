@@ -1,0 +1,12 @@
+@import '../../styles/colours.scss';
+
+footer {
+    background: $base-color-dark;
+    padding: 40px;
+    text-align: center;
+    color: $base-color-light;
+
+    position:fixed;
+    bottom:0;
+    width:100%;
+}

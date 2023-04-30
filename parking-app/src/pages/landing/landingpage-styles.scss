@@ -1,0 +1,30 @@
+@import "../../styles/colours.scss";
+.landing-main{
+    text-align: center;
+}
+
+.landing-content{
+    color: $base-color-light;
+    position: fixed;
+    top: 100px;
+    margin-left: 20px;
+    z-index: 1;
+}
+
+.landing-login{
+    position: fixed;
+    top: 100px;
+    z-index: 1;
+    right: 10%;
+    background-color: $base-color-light;
+    border-radius: 10px;
+}
+
+
+.video {
+    position: fixed;
+    z-index: 0;
+    right: 0;
+    top: -200px;
+    min-width: 100%;
+}
