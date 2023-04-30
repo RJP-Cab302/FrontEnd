@@ -8,10 +8,10 @@ export default function Vehicle(props) {
   const model = props.model;
   const type = props.type;
   //TODO remove dummy vehicles from listing page and fetch the vehicles from DB
-  const [vehicle_rego, setRegistration] = useState("");
-  const [vehicle_type, setType] = useState("");
-  const [vehicle_make, setMake] = useState("");
-  const [vehicle_model, setModel] = useState("");
+  const [vehicle_rego, setRegistration] = useState(rego);
+  const [vehicle_type, setType] = useState(type);
+  const [vehicle_make, setMake] = useState(make);
+  const [vehicle_model, setModel] = useState(model);
   const [token, setToken] = useState("");
 
   const [isEditing, setIsEditing] = useState(false);

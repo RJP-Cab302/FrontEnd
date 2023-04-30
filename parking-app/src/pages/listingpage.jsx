@@ -33,9 +33,9 @@ export default function ListingPage() {
         for (let i = 0; i < data.vehicles.length; i++) {
           newVehicleList.push({
             rego: data.vehicles[i][0],
-            make: data.vehicles[i][1],
-            model: data.vehicles[i][2],
-            type: data.vehicles[i][3],
+            make: data.vehicles[i][2],
+            model: data.vehicles[i][3],
+            type: data.vehicles[i][1],
           });}}
         setVehicleList(newVehicleList);
          
@@ -58,9 +58,9 @@ export default function ListingPage() {
             <Vehicle
               key={index}
               rego={vehicle.rego}
-              make={vehicle.make}
-              model={vehicle.model}
               type={vehicle.type}
+              model={vehicle.model}
+              make={vehicle.make}
             />
           ))}
         </div>
