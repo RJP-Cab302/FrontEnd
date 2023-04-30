@@ -33,9 +33,7 @@ export default function Vehicle(props) {
     setModel(event.target.value);
   };
 
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
+ 
 
   const handleSaveClick = () => {
     setIsEditing(false);
@@ -127,9 +125,6 @@ export default function Vehicle(props) {
           <div className="col">
             {" "}
             {/* Add class "align-items-end" to align child elements to bottom */}
-            <button className="edit" onClick={handleEditClick}>
-              Edit
-            </button>
           </div>
         </div>
         <div className="row">

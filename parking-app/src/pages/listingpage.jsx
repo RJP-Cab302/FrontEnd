@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "../styles/listingpage.css";
 import Vehicle from "../components/Vehicle";
-import { Button } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 import Login from "../components/Login";
 
 export default function ListingPage() {
   const [token, setToken] = useState("");
   const [vehicleList, setVehicleList] = useState([]);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [formState, setFormState] = useState({
+    vehicle_rego: "",
+    vehicle_type: "",
+    vehicle_make: "",
+    vehicle_model: "",
+    token: ""
+
+  });
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
@@ -43,9 +52,41 @@ export default function ListingPage() {
       .catch((error) => console.error(error));
   }, [token]);
   const handleAddVehicle = () => {
-    setVehicleList([...vehicleList, { front: "", rear: "", description: "" }]);
+    setShowAddModal(true); // show the modal on click of the "Add Vehicle" button
+
   };
 
+  const handleAddModalClose = () => {
+    setShowAddModal(false); // hide the modal when the user clicks the close button
+  };
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({ ...formState, [name]: value });
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = {
+      vehicle_rego: formState.vehicle_rego,
+      vehicle_type: formState.vehicle_type,
+      vehicle_make: formState.vehicle_make,
+      vehicle_model: formState.vehicle_model,
+      token,
+    };
+    fetch("/add_vehicle", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+    console.log(formState);
+    setShowAddModal(false);
+     window.location.reload();
+  };
   if (token) {
     return (
       <div>
@@ -64,6 +105,58 @@ export default function ListingPage() {
             />
           ))}
         </div>
+
+        <Modal show={showAddModal} onHide={handleAddModalClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add Vehicle</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={handleSubmit}>
+              <label>
+                Rego:
+                <input
+                  type="text"
+                  name="vehicle_rego"
+                  value={formState.vehicle_rego}
+                  onChange={handleInputChange}
+                />
+              </label>
+              <label>
+                Make:
+                <input
+                  type="text"
+                  name="vehicle_make"
+                  value={formState.vehicle_make}
+                  onChange={handleInputChange}
+                />
+              </label>
+              <label>
+                Model:
+                <input
+                  type="text"
+                  name="vehicle_model"
+                  value={formState.vehicle_model}
+                  onChange={handleInputChange}
+                />
+              </label>
+              <label>
+                Type: 
+                <input
+                  type="text"
+                  name="vehicle_type"
+                  value={formState.vehicle_type}
+                  onChange={handleInputChange}
+                />
+              </label>
+              <Button type="submit">Submit</Button>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleAddModalClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   } else {
