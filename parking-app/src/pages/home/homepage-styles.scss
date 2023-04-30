@@ -1,0 +1,32 @@
+@import '../../styles/colours.scss';
+
+.home-main{
+    text-align: right;
+}
+
+.home-text{
+    position: fixed;
+    top: 100px;
+    right: 5%; 
+    z-index: 1;
+    color: $base-color-light;
+}
+
+.home-text-signedin{
+    position: fixed;
+    top: 100px;
+    right: 5%; 
+    z-index: 1;
+    color: $base-color-light;
+}
+.home-button-signout{
+    background-color: $base-color-light;
+}
+
+.video {
+    position: fixed;
+    z-index: 0;
+    right: 0;
+    top: -200px;
+    min-width: 100%;
+}
