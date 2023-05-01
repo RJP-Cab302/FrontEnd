@@ -45,7 +45,6 @@ const Login = (props) => {
   return (
     <div className="login-wrapper">
       <h1>Hello RJP</h1>
-      <h2>Login</h2>
       <h3>{message}</h3>
       <Form onSubmit={handleSubmit} className='login-form'>
         <Form.Group controlId="formBasicEmail">

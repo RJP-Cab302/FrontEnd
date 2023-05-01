@@ -3,11 +3,8 @@ import { Button } from 'react-bootstrap';
 import jwt_decode from "jwt-decode";
 import "./homepage-styles.scss"
 export default function Home() {
-    const [data, setData] = useState([{}]);
     const [user, setUser] = useState('');
-    useEffect(() => {
-        fetch("/example").then(res => res.json()).then(res => setData(res)).catch(error => console.error(error))
-    }, [])
+    
     useEffect(() => {
         if (localStorage.getItem("token")) {
             const token = localStorage.getItem("token");
@@ -41,8 +38,6 @@ export default function Home() {
 
             <div className='home-text'>
                 <div><h1>Hello RJP</h1></div>
-                <h2>{data.name}</h2>
-                <h2>{data.message}</h2>
             </div>            
             <video autoPlay muted loop className="video">
                 <source src="background-vid.mp4" type="video/mp4" />
