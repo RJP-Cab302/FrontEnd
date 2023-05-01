@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./listingpage-styles.scss";
 import Vehicle from "../../components/vehicle/Vehicle";
-import { Button } from "react-bootstrap";
-import Login from "../../components/login/Login";
 import { Button, Modal, Form } from "react-bootstrap";
+import Login from "../../components/login/Login";
 
 export default function ListingPage() {
   const [token, setToken] = useState("");
