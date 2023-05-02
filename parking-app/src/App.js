@@ -1,14 +1,15 @@
 import './App.css';
-import Header from "./components/Header";
-import Footer from './components/Footer';
-import LandingPage from './pages/landingpage';
+import Header from "./components/header/Header";
+import Footer from './components/footer/Footer';
+import LandingPage from './pages/landing/landingpage';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import About from './pages/aboutpage';
-import SignUp from './pages/signuppage';
-import ListingPage from './pages/listingpage';
-import Home from './pages/homepage';
-import LoginPage from './pages/loginpage';
-import UserProfilePage from './pages/userprofile';
+import About from './pages/about/aboutpage';
+import SignUp from './pages/signup/signuppage';
+import ListingPage from './pages/listing/listingpage';
+import Home from './pages/home/homepage';
+import LoginPage from './pages/login/loginpage';
+import BookingPage from './pages/booking/booking_page';
+
 function App() {
   return (
     <BrowserRouter>
@@ -21,8 +22,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/vehicles" element={<ListingPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/user" element={<UserProfilePage />} />
-
+		  <Route path="/book" element={<BookingPage />} />
         </Routes>
         <Footer />
       </div>

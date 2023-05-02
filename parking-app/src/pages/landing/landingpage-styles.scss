@@ -1,0 +1,63 @@
+@import "../../styles/colours.scss";
+
+.landingContent{
+    display: flex;
+    align-items: center;
+}
+.captionStyle{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+.slideContent{
+    display: inline-block;
+  justify-content: center; 
+  align-items: center;
+}
+h1.slideContent{
+    font-size: 43px;
+    
+}
+
+Button.slideContent{
+    padding: 10px;
+    background-color: rgba(94, 207, 217, 0.815);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 10%;
+    margin-top:15px;
+    margin-bottom: 20px;
+}
+Button.slideContent:hover{
+    background-color: rgba(25, 67, 206, 0.562) ;
+}
+#landingSignUpButton{
+    
+    padding: 10px;
+    background-color: rgba(94, 207, 217, 0.815);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 10%;
+    margin-top:15px;
+    margin-bottom: 20px;
+}
+#landingSignUpButton:hover{
+    background-color: rgba(25, 67, 206, 0.562) ;
+}
+.alreadyUser{
+    font-size: 19px;
+    
+    margin-bottom: 300px;
+    color: rgb(0, 0, 0);
+}
+
+#landingSignInButton:hover{
+    background-color: rgba(25, 67, 206, 0.562) ;
+}
+
+
