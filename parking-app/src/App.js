@@ -9,7 +9,7 @@ import ListingPage from './pages/listing/listingpage';
 import Home from './pages/home/homepage';
 import LoginPage from './pages/login/loginpage';
 import BookingPage from './pages/booking/booking_page';
-import UserProfilePage from './pages/userprofile/userprofilepage';
+import UserProfilePage from './pages/userprofile/userprofile_page';
 function App() {
   return (
     <BrowserRouter>

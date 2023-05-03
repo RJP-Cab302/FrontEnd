@@ -6,9 +6,8 @@ export default function Home() {
     const [user, setUser] = useState('');
     
     useEffect(() => {
-        if (localStorage.getItem("token")) {
-            const token = localStorage.getItem("token");
-            setUser(jwt_decode(token).user);
+        if (localStorage.getItem("name")) {
+            setUser(localStorage.getItem("name"));
         }
 
     }, [])
