@@ -8,11 +8,12 @@ export default function UserProfile() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   useEffect(() => {
-        if (localStorage.getItem("token")) {
-            setToken(localStorage.getItem("token"))
-            setEmail(localStorage.getItem("email"));
-            setPassword(localStorage.getItem("password"));
-}},[])
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+      setEmail(localStorage.getItem("email"));
+      setPassword(localStorage.getItem("password"));
+    }
+  }, []);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -24,32 +25,49 @@ export default function UserProfile() {
     setAddress(event.target.value);
   };
   const handleSaveClick = () => {
+    let headersList = {
+      "Content-Type": "application/json",
+    };
+
+    let bodyContent = JSON.stringify({
+      name: name,
+      useraddress: address,
+      token: token
+    });
+
+    fetch("/update_profile", {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList,
+    });
+
     setIsEditing(false);
+    localStorage.setItem("name", name);
+    window.location.href = `/user`;
   };
 
   const handleCancelClick = () => {
     setIsEditing(false);
   };
-  const handelDelete = () => 
-  {
-  let headersList = {
-    Authorization: `Basic ${btoa(`${email}:${password}`)}`,
-    "Content-Type": "application/json",
+  const handelDelete = () => {
+    let headersList = {
+      Authorization: `Basic ${btoa(`${email}:${password}`)}`,
+      "Content-Type": "application/json",
+    };
+
+    let bodyContent = JSON.stringify({
+      token: token,
+    });
+
+    fetch("/delete", {
+      method: "DELETE",
+      body: bodyContent,
+      headers: headersList,
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+    window.location.href = `/`;
   };
-
-let bodyContent = JSON.stringify({ 
-  token: token,
-  
-
-});
-
-fetch("/delete", { 
-  method: "DELETE",
-  body: bodyContent,
-  headers: headersList
-}).then((res) => res.json()).then((data) => console.log(data));
-  window.location.href = `/`;
-  }
   if (isEditing) {
     return (
       <div>
