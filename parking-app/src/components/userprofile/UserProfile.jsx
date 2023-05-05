@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import {Button} from 'react-bootstrap'
+import './userprofile-styles.scss'
 export default function UserProfile() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -70,7 +72,7 @@ export default function UserProfile() {
   };
   if (isEditing) {
     return (
-      <div>
+      <div className="user-profile-main">
         <div className="container">
           <div className="row">
             <div className="col">
@@ -87,19 +89,19 @@ export default function UserProfile() {
             </div>
           </div>
           {/* Add class "align-items-end" to align child elements to bottom */}
-          <button className="save-cancel" onClick={handleSaveClick}>
+          <Button className="save-cancel" onClick={handleSaveClick}>
             Save
-          </button>
-          <button className="save-cancel" onClick={handleCancelClick}>
+          </Button>
+          <Button className="save-cancel" onClick={handleCancelClick}>
             Cancel
-          </button>
+          </Button>
         </div>
-        <button onClick={handelDelete}>Delete Account</button>
+        <Button onClick={handelDelete}>Delete Account</Button>
       </div>
     );
   }
   return (
-    <div>
+    <div className="user-profile-main">
       <div className="container">
         <div className="row">
           <div className="col">
@@ -111,13 +113,15 @@ export default function UserProfile() {
           <div className="col">
             {" "}
             {/* Add class "align-items-end" to align child elements to bottom */}
-            <button className="edit" onClick={handleEditClick}>
+            <Button className="edit" onClick={handleEditClick}>
               Edit
-            </button>
+            </Button>
           </div>
         </div>
       </div>
-      <button onClick={handelDelete}>Delete Account</button>
+      <div className="user-profile-btn">
+        <Button onClick={handelDelete}>Delete Account</Button>
+      </div>
     </div>
   );
 }
