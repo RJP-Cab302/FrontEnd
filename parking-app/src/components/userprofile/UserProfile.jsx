@@ -1,9 +1,19 @@
-import React from 'react'
-import { useState } from 'react'
+import React from "react";
+import { useState, useEffect } from "react";
 export default function UserProfile() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+  const [token, setToken] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  useEffect(() => {
+        if (localStorage.getItem("token")) {
+            setToken(localStorage.getItem("token"))
+            setEmail(localStorage.getItem("email"));
+            setPassword(localStorage.getItem("password"));
+}},[])
+
   const handleEditClick = () => {
     setIsEditing(true);
   };
@@ -20,6 +30,26 @@ export default function UserProfile() {
   const handleCancelClick = () => {
     setIsEditing(false);
   };
+  const handelDelete = () => 
+  {
+  let headersList = {
+    Authorization: `Basic ${btoa(`${email}:${password}`)}`,
+    "Content-Type": "application/json",
+  };
+
+let bodyContent = JSON.stringify({ 
+  token: token,
+  
+
+});
+
+fetch("/delete", { 
+  method: "DELETE",
+  body: bodyContent,
+  headers: headersList
+}).then((res) => res.json()).then((data) => console.log(data));
+  window.location.href = `/`;
+  }
   if (isEditing) {
     return (
       <div>
@@ -29,11 +59,7 @@ export default function UserProfile() {
               <div>
                 <span>Nmae</span>
               </div>
-              <input
-                type="text"
-                value={name}
-                onChange={changeName}
-              />
+              <input type="text" value={name} onChange={changeName} />
             </div>
             <div className="col">
               <div>
@@ -42,15 +68,16 @@ export default function UserProfile() {
               <input type="text" value={address} onChange={changeAddress} />
             </div>
           </div>
-              {/* Add class "align-items-end" to align child elements to bottom */}
-              <button className="save-cancel" onClick={handleSaveClick}>
-                Save
-              </button>
-              <button className="save-cancel" onClick={handleCancelClick}>
-                Cancel
-              </button>
-            </div>
-          </div>
+          {/* Add class "align-items-end" to align child elements to bottom */}
+          <button className="save-cancel" onClick={handleSaveClick}>
+            Save
+          </button>
+          <button className="save-cancel" onClick={handleCancelClick}>
+            Cancel
+          </button>
+        </div>
+        <button onClick={handelDelete}>Delete Account</button>
+      </div>
     );
   }
   return (
@@ -71,13 +98,8 @@ export default function UserProfile() {
             </button>
           </div>
         </div>
-
-
       </div>
+      <button onClick={handelDelete}>Delete Account</button>
     </div>
-
-  )
+  );
 }
-
-
-

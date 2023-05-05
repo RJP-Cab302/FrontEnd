@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import jwt_decode from "jwt-decode";
+
 import "./homepage-styles.scss"
 export default function Home() {
     const [user, setUser] = useState('');
