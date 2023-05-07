@@ -36,8 +36,7 @@ jobs:
       
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
-      with:
-        token: ${{ secrets.1556b22b-29f5-408b-b23c-03a09ff8f5bf }}
+  
 
     - name: Build
       run: npm run build
