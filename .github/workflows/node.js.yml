@@ -29,10 +29,13 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Install dependencies
+      working-directory: ./parking-app
       run: npm install
 
     - name: Run the tests and generate coverage report
+      working-directory: ./parking-app
       run: npm test -- --coverage
 
     - name: Build
+      working-directory: ./parking-app
       run: npm run build
