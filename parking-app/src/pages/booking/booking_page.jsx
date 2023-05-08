@@ -11,6 +11,7 @@ export default function BookingPage() {
   const [licenseNumber, setLicenseNumber] = useState('');
   const [bookings, setBookings] = useState([]);
   const selectedDateRef = useRef(selectedDate);
+  const [bookingPrice, setBookingPrice] = useState([]);
 
 
   function handleVehicleModelChange(event) {
@@ -28,6 +29,30 @@ export default function BookingPage() {
   function handleLicenseNumberChange(event) {
     setLicenseNumber(event.target.value);
   }
+  
+    // Call the backend API to get the price
+    async function get_price_api() {
+      const headersList = {
+        "Accept": "*/*",
+        "Content-Type": "application/json"
+      };
+    
+      const bodyContent = JSON.stringify({
+        "year":2023,
+        "day":160
+        //"year": selectedDate.getFullYear(),
+        //"day": Math.floor((selectedDate - new Date(selectedDate.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24))
+      });
+    
+      const response = await fetch("/get_day_price", { 
+        method: "POST",
+        body: bodyContent,
+        headers: headersList
+      });
+    
+      const data = await response.json();
+      setBookingPrice(data["Price"]);
+    }
 
   const handleSubmission = async () => {
     // Get the selected date from the state
@@ -38,26 +63,6 @@ export default function BookingPage() {
     const vehicleBrand = document.getElementById("vehicleBrandInput").value;
     const vehicleColor = document.getElementById("vehicleColorInput").value;
     const licenseNumber = document.getElementById("licenseNumberInput").value;
-  
-    // Call the backend API to get the price
-    const headersList = {
-      "Accept": "*/*",
-      "Content-Type": "application/json"
-    };
-  
-    const bodyContent = JSON.stringify({
-      "year": selectedDate.getFullYear(),
-      "day": Math.floor((selectedDate - new Date(selectedDate.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24))
-    });
-  
-    const response = await fetch("http://localhost:8080/get_day_price", { 
-      method: "POST",
-      body: bodyContent,
-      headers: headersList
-    });
-  
-    const data = await response.text();
-    const bookingPrice = parseFloat(data);
   
     // Create a booking object with the selected date, vehicle details, and price
     const booking = {
@@ -97,6 +102,8 @@ export default function BookingPage() {
     const clickedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), day);
     setSelectedDate(clickedDate);
     setSelectedDateText(`${clickedDate.getDate()}/${clickedDate.getMonth() + 1}/${clickedDate.getFullYear()}`);
+    get_price_api();
+
   }
   
 
@@ -201,7 +208,7 @@ export default function BookingPage() {
 
     const formattedDate = `${day} ${monthName}, ${year}`;
 
-    const bookingPrice = 150;
+
 
     
 
