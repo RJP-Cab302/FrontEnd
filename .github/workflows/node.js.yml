@@ -37,4 +37,6 @@ jobs:
     - name: Build
 
       working-directory: ./parking-app
-      run: CI='' npm run build
+      run: 
+        CI='' npm run build
+        npm test
