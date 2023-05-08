@@ -53,9 +53,34 @@ export default function BookingPage() {
       const data = await response.json();
       setBookingPrice(data["Price"]);
     }
+  async function makebookingapi(rego, year, day, base_fare, token){
+    let headersList = {
+      "Accept": "*/*",
+      "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+      "Content-Type": "application/json"
+     }
+     
+     let bodyContent = JSON.stringify({
+      "vehicle_rego" : rego,
+      "year" : year,
+      "day" : day,
+      "base_fare": base_fare,
+       "token": token
+     });
+     
+     let response = await fetch("/booking", { 
+       method: "POST",
+       body: bodyContent,
+       headers: headersList
+     });
+     
+     let data = await response.text();
+     console.log(data);
+    }
 
   const handleSubmission = async () => {
     // Get the selected date from the state
+    const token = localStorage.getItem("token");
     const selectedDate = selectedDateRef.current;
   
     // Get the vehicle details from the input fields
@@ -78,12 +103,13 @@ export default function BookingPage() {
   
     // Add the booking to the list of bookings
     setBookings([...bookings, booking]);
-  
+    makebookingapi(licenseNumber, selectedDate.getFullYear(), Math.floor((selectedDate - new Date(selectedDate.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24)), bookingPrice, token);
     // Reset the input fields
     document.getElementById("vehicleModelInput").value = "";
     document.getElementById("vehicleBrandInput").value = "";
     document.getElementById("vehicleColorInput").value = "";
     document.getElementById("licenseNumberInput").value = "";
+
   };
   
   
