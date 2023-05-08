@@ -1,11 +1,87 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./booking_page-styles.scss";
 
 export default function BookingPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedDateText, setSelectedDateText] = useState("");
+  const [vehicleModel, setVehicleModel] = useState('');
+  const [vehicleBrand, setVehicleBrand] = useState('');
+  const [vehicleColor, setVehicleColor] = useState('');
+  const [licenseNumber, setLicenseNumber] = useState('');
+  const [bookings, setBookings] = useState([]);
+  const selectedDateRef = useRef(selectedDate);
 
+
+  function handleVehicleModelChange(event) {
+    setVehicleModel(event.target.value);
+  }
+
+  function handleVehicleBrandChange(event) {
+    setVehicleBrand(event.target.value);
+  }
+
+  function handleVehicleColorChange(event) {
+    setVehicleColor(event.target.value);
+  }
+
+  function handleLicenseNumberChange(event) {
+    setLicenseNumber(event.target.value);
+  }
+
+  const handleSubmission = async () => {
+    // Get the selected date from the state
+    const selectedDate = selectedDateRef.current;
+  
+    // Get the vehicle details from the input fields
+    const vehicleModel = document.getElementById("vehicleModelInput").value;
+    const vehicleBrand = document.getElementById("vehicleBrandInput").value;
+    const vehicleColor = document.getElementById("vehicleColorInput").value;
+    const licenseNumber = document.getElementById("licenseNumberInput").value;
+  
+    // Call the backend API to get the price
+    const headersList = {
+      "Accept": "*/*",
+      "Content-Type": "application/json"
+    };
+  
+    const bodyContent = JSON.stringify({
+      "year": selectedDate.getFullYear(),
+      "day": Math.floor((selectedDate - new Date(selectedDate.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24))
+    });
+  
+    const response = await fetch("http://localhost:8080/get_day_price", { 
+      method: "POST",
+      body: bodyContent,
+      headers: headersList
+    });
+  
+    const data = await response.text();
+    const bookingPrice = parseFloat(data);
+  
+    // Create a booking object with the selected date, vehicle details, and price
+    const booking = {
+      date: selectedDate,
+      vehicle: {
+        model: vehicleModel,
+        brand: vehicleBrand,
+        color: vehicleColor,
+        licenseNumber: licenseNumber
+      },
+      price: bookingPrice
+    };
+  
+    // Add the booking to the list of bookings
+    setBookings([...bookings, booking]);
+  
+    // Reset the input fields
+    document.getElementById("vehicleModelInput").value = "";
+    document.getElementById("vehicleBrandInput").value = "";
+    document.getElementById("vehicleColorInput").value = "";
+    document.getElementById("licenseNumberInput").value = "";
+  };
+  
+  
 
   function handlePrevMonth() {
     const previousMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1, 1);
@@ -24,14 +100,6 @@ export default function BookingPage() {
   }
   
 
-  function SelectedDate({ selectedDate }) {
-    return (
-      <div style={{ backgroundColor: "blue", color: "white", padding: "10px", height: "100vh" }}>
-        <h2>Selected Date:</h2>
-        <p>{selectedDate ? selectedDate.toDateString() : "Please select a date"}</p>
-      </div>
-    );
-  }
   
 
   function renderCalendarHeader() {
@@ -135,47 +203,63 @@ export default function BookingPage() {
 
     const bookingPrice = 150;
 
-    function render() {
-        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const day = selectedDate.getDate();
-        const monthIndex = selectedDate.getMonth();
-        const year = selectedDate.getFullYear();
-        const monthName = monthNames[monthIndex];
-        const formattedDate = `${day} ${monthName}, ${year}`;
-        
-    }
+    
 
     return (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div>
-            <table style={{ width: "100%", borderCollapse: "collapse" }}>
-              <thead>
-                <tr>
-                  <th style={{ textAlign: "center" }} colSpan={7}>
-                    <h1>Booking Page</h1>
-                    {renderCalendarHeader()}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style={{ verticalAlign: "top", textAlign: "center" }}>
-                    {renderCalendar()}
-                  </td>
-                  <td style={{ verticalAlign: "top", paddingLeft: "20px" }}>
-                    <div style={{ border: "2px solid black", backgroundColor: "blue", color: "white", padding: "10px", borderRadius: "5px" }}>
-                      <div style={{ fontSize: "20px", marginBottom: "5px" }}>Selected date:</div>
-                      <div>{formattedDate}</div>
-                      <div style={{marginTop: "10px"}}>Booking price: ${bookingPrice}</div>
-                      <button style={{marginTop: "10px"}}>Book now</button>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div>
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
+            <thead>
+              <tr>
+                <th style={{ textAlign: "center" }} colSpan={7}>
+                  <h1>Booking Page</h1>
+                  {renderCalendarHeader()}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{ verticalAlign: "top" }}>
+                  <div style={{ width: "230px", border: "2px solid black", backgroundColor: "blue", color: "white", padding: "10px", borderRadius: "5px", marginRight: "20px" }}>
+                    <div style={{ fontSize: "20px", marginBottom: "10px" }}>Vehicle description</div>
+                    <div>
+                      <label>Vehicle model:</label>
+                      <input type="text" name="vehicle-model" id="vehicleModelInput" onChange={(e) => setVehicleModel(e.target.value)} />
                     </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                    <div>
+                      <label>Vehicle brand:</label>
+                      <input type="text" name="vehicle-brand" id="vehicleBrandInput" onChange={(e) => setVehicleBrand(e.target.value)} />
+                    </div>
+                    <div>
+                      <label>Colour:</label>
+                      <input type="text" name="colour" id="vehicleColorInput" onChange={(e) => setVehicleColor(e.target.value)} />
+                    </div>
+                    <div>
+                      <label>License number:</label>
+                      <input type="text" name="license-number" id="licenseNumberInput" onChange={(e) => setLicenseNumber(e.target.value)} />
+                    </div>
+                    <button style={{ marginTop: "10px" }} onClick={handleSubmission}>Submit</button>
+                  </div>
+                </td>
+                <td style={{ verticalAlign: "top", textAlign: "center" }}>
+                  {renderCalendar()}
+                </td>
+                <td style={{ verticalAlign: "top", paddingLeft: "20px" }}>
+                  <div style={{ border: "2px solid black", backgroundColor: "blue", color: "white", padding: "10px", borderRadius: "5px" }}>
+                    <div style={{ fontSize: "20px", marginBottom: "5px" }}>Selected date:</div>
+                    <div>{formattedDate}</div>
+                    <div style={{ marginTop: "10px" }}>Booking price: ${bookingPrice}</div>
+                    <button onClick={handleSubmission}>Book Now</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      );     
+      </div>
+    );
+    
+      
       
       
       
